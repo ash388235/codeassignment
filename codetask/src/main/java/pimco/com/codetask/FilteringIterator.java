@@ -1,12 +1,12 @@
 package pimco.com.codetask;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class FilteringIterator<E>  implements Iterator<E>{
 	private IObjectTest<E> iObjectTest;
 	private Iterator<E> iterator;
 	private E nextCached;
-	
 	
 	public FilteringIterator(IObjectTest<E> iObjectTest, Iterator<E> iterator) {
 		super();
@@ -26,8 +26,37 @@ public class FilteringIterator<E>  implements Iterator<E>{
 		return false;
 	}
 
+	
 	public E next() {
-		return nextCached;
+		if(nextCached!=null){
+			E temp=nextCached;
+			nextCached=null;
+			return temp;
+		}else if(hasNext()==true){
+			E temp=nextCached;
+			nextCached=null;
+			return temp;
+		}else{
+		    throw new NoSuchElementException("No such Element available.");
+		}
+		
+		
+	}
+
+	public IObjectTest<E> getiObjectTest() {
+		return iObjectTest;
+	}
+
+	public void setiObjectTest(IObjectTest<E> iObjectTest) {
+		this.iObjectTest = iObjectTest;
+	}
+
+	public Iterator<E> getIterator() {
+		return iterator;
+	}
+
+	public void setIterator(Iterator<E> iterator) {
+		this.iterator = iterator;
 	}
 	
 	
