@@ -1,0 +1,45 @@
+
+
+1. Explain why recursive implementation of QuickSort will require O(log n) of additional space
+   - in QuickSort algoritham we are partitioning array into two using some pevotal value.
+      and than we call QuickSort on new partitions recursively. until we sort entire array.
+	  
+	  so consider we have n elements in array . as we are deviding problem in half everytime.
+	  so we will make log(n)  recursive call to solve this.
+	  
+	  now lets see Pseudocode for QuickSort:
+	  QuickSort(Array array,number low,number high){
+	       if(low<high){
+		     pivot = partition(array,low,high)
+			 QuickSort(array,low,pivot)
+			 QuickSort(array,pivot+1,high)
+		   }
+	  }
+	  
+	 as per code, we can see everytime we make recursive call , we need to save down values like pivot,low,high on stack
+	 this way we need to save some constant number of values for each recursive call on stack.
+	 
+	 and as we know we need to make recursive call log(n) times for n elements ,
+	 and for same we need O(log n) space.
+	 
+2. Explain the design pattern used in Java and .NET io stream/reader APIs.
+    - code syntax java
+	stream/reader  uses Decorator Design pattern.
+	Explanation:
+	once we create stream or reader, we can wrap those class with other implementation and can add more functionality as per need, without changing original Stream/Reader.
+	for example as shown in below code .. we have FileReader and FileInputStream.
+	we have used BufferedReader to read file's content using buffer to speedup performance without making any change to FileReader
+	same way we can use BufferedInputStream to enhance functionality of FileInputStream without changing FileInputStream.
+	same way we can use DataInputStream,GZIPInputStream on stream.
+		
+		FileReader fileReader = new FileReader("c:\\test.txt");
+		BufferedReader buffereReader = new BufferedReader(fileReader);
+		buffereReader.read();
+		buffereReader.readLine();
+		
+		FileInputStream fis = new FileInputStream ("c:\\|test.txt");
+		BufferedInputStream bis = new BufferedInputStream (fis);
+		fis.read();
+		bis.read();
+	
+	  
